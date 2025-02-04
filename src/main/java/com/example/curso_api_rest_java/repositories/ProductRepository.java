@@ -1,11 +1,11 @@
 package com.example.curso_api_rest_java.repositories;
 
-import com.example.curso_api_rest_java.model.Book;
+import com.example.curso_api_rest_java.model.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface BookRepository extends JpaRepository<Book, Long> {
-    Page<Book> findByTitleContainingIgnoreCase(String title, Pageable pageable);
+public interface ProductRepository extends JpaRepository<Product, Long> {
+    Page<Product> findByNameContainingIgnoreCase(String name, Pageable pageable);
 }
 

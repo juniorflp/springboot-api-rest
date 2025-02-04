@@ -1,8 +1,8 @@
 package com.example.curso_api_rest_java.controllers;
 
-import com.example.curso_api_rest_java.dto.BookDTO;
+import com.example.curso_api_rest_java.dto.ProductDTO;
 import com.example.curso_api_rest_java.exceptions.ResourceNotFoundException;
-import com.example.curso_api_rest_java.services.BookServices;
+import com.example.curso_api_rest_java.services.ProductServices;
 import com.example.curso_api_rest_java.services.ImageService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,52 +15,51 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("api/book/v1")
-@Tag(name = "Book", description = "Endpoints for Managing Books")
-public class BookController {
+@RequestMapping("api/product/v1")
+@Tag(name = "Product", description = "Endpoints for Managing Products")
+public class ProductController {
 
     @Autowired
-    private BookServices service;
+    private ProductServices service;
 
     @Autowired
     private ImageService imageService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Page<BookDTO>>findAll(
+    public ResponseEntity<Page<ProductDTO>>findAll(
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "size", defaultValue = "10") int size,
             @RequestParam(value = "search", required=false) String search
     ){
         Pageable pageable = PageRequest.of(page, size);
-        Page<BookDTO> booksPage = service.findAll(search, pageable);
+        Page<ProductDTO> productsPage = service.findAll(search, pageable);
 
-        return ResponseEntity.ok(booksPage);
+        return ResponseEntity.ok(productsPage);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public BookDTO findById(@PathVariable(value = "id") Long id) {
+    public ProductDTO findById(@PathVariable(value = "id") Long id) {
         return service.findById(id);
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public BookDTO create(@RequestBody BookDTO book) {
-        return service.create(book);
+    public ProductDTO create(@RequestBody ProductDTO product) {
+        return service.create(product);
     }
 
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public BookDTO update(@PathVariable(value = "id") Long id, @RequestBody BookDTO book) {
-        return service.update(id, book);
+    public ProductDTO update(@PathVariable(value = "id") Long id, @RequestBody ProductDTO product) {
+        return service.update(id, product);
     }
 
     @PatchMapping(value="/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BookDTO> patchBook(@PathVariable Long id,@RequestBody Map<String, Object> updates ){
+    public ResponseEntity<ProductDTO> patchProduct(@PathVariable Long id, @RequestBody Map<String, Object> updates ){
         try{
-            BookDTO updatedBook = service.updatePartial(id, updates);
-            return ResponseEntity.ok(updatedBook);
+            ProductDTO updatedProduct = service.updatePartial(id, updates);
+            return ResponseEntity.ok(updatedProduct);
         }catch(ResourceNotFoundException e){
             return ResponseEntity.notFound().build();
         }catch(Exception e){
@@ -80,12 +79,12 @@ public class BookController {
     @PostMapping(value = "/{id}/image",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BookDTO> uploadOrUpdateImage(@PathVariable Long id, @RequestParam("image") MultipartFile image){
+    public ResponseEntity<ProductDTO> uploadOrUpdateImage(@PathVariable Long id, @RequestParam("image") MultipartFile image){
         try{
             String imagePath = imageService.saveImage(image);
-            BookDTO updatedBook = service.updateImageUrl(id, imagePath);
+            ProductDTO updatedProduct = service.updateImageUrl(id, imagePath);
 
-            return  ResponseEntity.ok(updatedBook);
+            return  ResponseEntity.ok(updatedProduct);
 
         }catch(IOException e){
             return ResponseEntity.status(500).build();
