@@ -1,0 +1,6 @@
+CREATE TABLE orders (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    datetime DATETIME NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    total DECIMAL(19, 2) NOT NULL
+);

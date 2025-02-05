@@ -4,6 +4,7 @@ import com.example.curso_api_rest_java.model.Product;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.hateoas.Link;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +15,7 @@ public class ProductDTO {
     private Long id;
     private String name;
     private String description;
-    private Double price;
+    private BigDecimal price;
     private String imageUrl;
     private Boolean available;
     private Product.CategoryProduct category;
@@ -49,11 +50,11 @@ public class ProductDTO {
         this.imageUrl = imageUrl;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

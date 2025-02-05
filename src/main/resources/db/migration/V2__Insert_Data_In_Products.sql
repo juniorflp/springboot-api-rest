@@ -1,4 +1,4 @@
-﻿INSERT INTO product (name, description, price, image_url, category, available) VALUES
+﻿INSERT INTO products (name, description, price, image_url, category, available) VALUES
 ('Cheeseburger Duplo', 'Dois hambúrgueres, queijo cheddar, cebola caramelizada', 32.90, NULL, 'LANCHE', 1),
 ('Onion Rings', 'Anéis de cebola empanados crocantes', 14.90, 'https://exemplo.com/onion-rings.jpg', 'ACOMPANHAMENTO', 1),
 ('Suco Natural', 'Suco de laranja ou abacaxi com hortelã (500ml)', 10.00, NULL, 'BEBIDA', 1),

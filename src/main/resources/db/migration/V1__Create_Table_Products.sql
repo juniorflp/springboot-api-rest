@@ -1,4 +1,4 @@
-﻿CREATE TABLE `product` (
+﻿CREATE TABLE `products` (
   `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador único do produto',
   `name` VARCHAR(80) NOT NULL COMMENT 'Nome comercial do produto',
   `description` VARCHAR(150) NOT NULL COMMENT 'Detalhes/composição do produto',

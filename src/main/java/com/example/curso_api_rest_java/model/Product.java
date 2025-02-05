@@ -3,11 +3,12 @@ package com.example.curso_api_rest_java.model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "product")
+@Table(name = "products")
 public class Product implements Serializable {
 
     @Id
@@ -18,7 +19,7 @@ public class Product implements Serializable {
     @Column(nullable = false, length = 150)
     private String description;
     @Column(nullable = false)
-    private Double price;
+    private BigDecimal price;
     @Column(name = "image_url")
     private String imageUrl;
     @Enumerated(EnumType.STRING)
@@ -58,11 +59,11 @@ public class Product implements Serializable {
         this.description = description;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
